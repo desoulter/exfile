@@ -5,7 +5,7 @@ defmodule Exfile.Token do
   def verify_token(path, token) do
     case Base.decode16(token, case: :lower) do
       {:ok, hmac} ->
-        hmac == do_generate_token(path)
+        hmac == do_generate_token(URI.decode(path))
       :error ->
         false
     end
