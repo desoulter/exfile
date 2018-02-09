@@ -109,7 +109,12 @@ defmodule Exfile.Backend.FileSystem do
     files_or_error = case File.stat(file_abspath, time: :posix) do
       {:ok, %File.Stat{mtime: time}} when (time + ttl) < now ->
         # perform delete
-        with :ok <- File.rm(file_abspath), do: files
+        case File.dir?(file_abspath) do
+          true ->
+            files
+          false ->
+            with :ok <- File.rm(file_abspath), do: files
+        end
       {:ok, _} -> files
       error -> error
     end
