@@ -27,8 +27,8 @@ defmodule Exfile.Mixfile do
         ]
       ],
       aliases: [
-        "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-        "publish": [&git_tag/1, "hex.publish", "hex.docs"]
+        test: ["ecto.create --quiet", "ecto.migrate", "test"],
+        publish: [&git_tag/1, "hex.publish", "hex.docs"]
       ]
     ]
   end
